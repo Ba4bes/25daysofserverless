@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_4besday2_name": {
+            "value": "4besday2"
+        },
+        "workflows_4besday2_parameters_$connections": {
+            "value": {
+                "office365": {
+                    "connectionId": "/subscriptions/123456-123-123-123-12345678/resourceGroups/4besday2/providers/Microsoft.Web/connections/office365",
+                    "connectionName": "office365",
+                    "id": "/subscriptions/123456-123-123-123-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
+                }
+            }
+        }
+    }
+}

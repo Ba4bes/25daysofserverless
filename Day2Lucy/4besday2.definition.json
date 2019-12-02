@@ -1,0 +1,257 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_4besday2_name": {
+            "defaultValue": "4besday2",
+            "type": "string"
+        },
+        "workflows_4besday2_parameters_$connections": {
+            "defaultValue": {
+                "office365": {
+                    "connectionId": "/subscriptions/123456-123-123-123-12345678/resourceGroups/4besday2/providers/Microsoft.Web/connections/office365",
+                    "connectionName": "office365",
+                    "id": "/subscriptions/123456-123-123-123-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
+                }
+            },
+            "type": "Object"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-07-01",
+            "dependsOn": [
+            ],
+            "location": "westeurope",
+            "name": "[parameters('workflows_4besday2_name')]",
+            "properties": {
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {
+                                "office365": {
+                                    "connectionId": "/subscriptions/123456-123-123-123-12345678/resourceGroups/4besday2/providers/Microsoft.Web/connections/office365",
+                                    "connectionName": "office365",
+                                    "id": "/subscriptions/123456-123-123-123-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
+                                }
+                            },
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "Recurrence": {
+                            "recurrence": {
+                                "frequency": "Day",
+                                "interval": 1,
+                                "startTime": "2019-12-13T08:00:00Z"
+                            },
+                            "type": "Recurrence"
+                        }
+                    },
+                    "actions": {
+                        "Until": {
+                            "actions": {
+                                "Current_time": {
+                                    "runAfter": {
+                                    },
+                                    "type": "Expression",
+                                    "kind": "CurrentTime",
+                                    "inputs": {
+                                    }
+                                },
+                                "Delay": {
+                                    "runAfter": {
+                                        "Send_an_email_(V2)": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Wait",
+                                    "inputs": {
+                                        "interval": {
+                                            "count": 10,
+                                            "unit": "Minute"
+                                        }
+                                    }
+                                },
+                                "Send_an_email_(V2)": {
+                                    "runAfter": {
+                                        "Current_time": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Body": "<p>Light the 🕯s</p>",
+                                            "Subject": "Light the 🕯",
+                                            "To": "mail@address.com"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v2/Mail"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                            },
+                            "expression": "@equals(body('Current_time'), '2019-12-13T17:00:00Z')",
+                            "limit": {
+                                "count": 60,
+                                "timeout": "PT1H"
+                            },
+                            "type": "Until"
+                        },
+                        "Until_2": {
+                            "actions": {
+                                "Current_time_2": {
+                                    "runAfter": {
+                                    },
+                                    "type": "Expression",
+                                    "kind": "CurrentTime",
+                                    "inputs": {
+                                    }
+                                },
+                                "Delay_2": {
+                                    "runAfter": {
+                                        "Send_an_email_(V2)_2": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Wait",
+                                    "inputs": {
+                                        "interval": {
+                                            "count": 25,
+                                            "unit": "Minute"
+                                        }
+                                    }
+                                },
+                                "Delay_3": {
+                                    "runAfter": {
+                                        "Send_an_email_(V2)_3": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Wait",
+                                    "inputs": {
+                                        "interval": {
+                                            "count": 4,
+                                            "unit": "Minute"
+                                        }
+                                    }
+                                },
+                                "Delay_4": {
+                                    "runAfter": {
+                                        "Send_an_email_(V2)_4": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Wait",
+                                    "inputs": {
+                                        "interval": {
+                                            "count": 4,
+                                            "unit": "Minute"
+                                        }
+                                    }
+                                },
+                                "Send_an_email_(V2)_2": {
+                                    "runAfter": {
+                                        "Current_time_2": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Body": "<p>start a coffee pot</p>",
+                                            "Subject": "Start the ☕☕☕☕",
+                                            "To": "mail@address.com"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v2/Mail"
+                                    }
+                                },
+                                "Send_an_email_(V2)_3": {
+                                    "runAfter": {
+                                        "Delay_2": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Body": "<p>pour coffee coffee</p>",
+                                            "Subject": "pour and bring the first coffee",
+                                            "To": "mail@address.com"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v2/Mail"
+                                    }
+                                },
+                                "Send_an_email_(V2)_4": {
+                                    "runAfter": {
+                                        "Delay_3": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Body": "<p>pour the second coffee</p>",
+                                            "Subject": "pour the second coffee",
+                                            "To": "mail@address.com"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v2/Mail"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                            },
+                            "expression": "@equals(body('Current_time'), '2019-12-13T17:00:00Z')",
+                            "limit": {
+                                "count": 60,
+                                "timeout": "PT1H"
+                            },
+                            "type": "Until"
+                        }
+                    },
+                    "outputs": {
+                    }
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": "[parameters('workflows_4besday2_parameters_$connections')]"
+                    }
+                },
+                "state": "Enabled"
+            },
+            "scale": null,
+            "tags": {
+            },
+            "type": "Microsoft.Logic/workflows"
+        }
+    ],
+    "variables": {
+    }
+}
