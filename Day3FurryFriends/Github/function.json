@@ -10,15 +10,15 @@
       ]
     },
     {
-      "type": "http",
-      "direction": "out",
-      "name": "Response"
-    },
-    {
       "type": "queue",
       "direction": "out",
       "name": "ImageQueue",
-      "queueName": "ImageQueue"
+      "queueName": "image-queue"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
     }
   ]
 }

@@ -6,9 +6,11 @@ param($Request, $TriggerMetadata)
 # Write to the Azure Functions log stream.
 Write-Host "PowerShell HTTP trigger function processed a request."
 $addedpngs = $Request.Body.commits.added | Where-Object { $_ -like "*.png" }
+Write-Output "request;" $Request.Body.Commits.Added
+Write-output "pngs; $addedpngs"
 if ($addedpngs.Count -ne 0) {
     foreach ($addedpng in $addedpngs) {
-        $URL = "https://github.com/Ba4bes/25daysofserverless/blob/master" + ( $addedpng -replace " ", "%20")
+        $URL = "https://github.com/Ba4bes/25daysofserverless/blob/master/" + ( $addedpng -replace " ", "%20")
         Push-OutputBinding -Name ImageQueue -Value $URL
     }
 }
