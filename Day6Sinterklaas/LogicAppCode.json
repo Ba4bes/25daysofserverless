@@ -1,0 +1,101 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Condition": {
+                "actions": {
+                    "Create_job": {
+                        "inputs": {
+                            "body": {
+                                "properties": {
+                                    "parameters": {
+                                        "Message": "@triggerBody()?['body']?['content']",
+                                        "date": "@triggerBody()?['body']?['content']"
+                                    }
+                                }
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['azureautomation']['connectionId']"
+                                }
+                            },
+                            "method": "put",
+                            "path": "/subscriptions/@{encodeURIComponent('123456-123-123-123-12345678')}/resourceGroups/@{encodeURIComponent('4besday6')}/providers/Microsoft.Automation/automationAccounts/@{encodeURIComponent('ForbesDay6')}/jobs",
+                            "queries": {
+                                "runbookName": "New-RunbookSchedule",
+                                "wait": false,
+                                "x-ms-api-version": "2015-10-31"
+                            }
+                        },
+                        "runAfter": {},
+                        "type": "ApiConnection"
+                    }
+                },
+                "expression": {
+                    "or": [
+                        {
+                            "contains": [
+                                "@triggerBody()?['body']?['content']",
+                                "/Schedule"
+                            ]
+                        },
+                        {
+                            "contains": [
+                                "@triggerBody()?['body']?['content']",
+                                "/schedule"
+                            ]
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "If"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_new_channel_message_is_added": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['teams']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/trigger/beta/teams/@{encodeURIComponent('123456-123-123-123-12345678')}/channels/@{encodeURIComponent('19:123456-123-123-123-12345678@thread.skype')}/messages",
+                    "queries": {
+                        "$top": 50
+                    }
+                },
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 1
+                },
+                "splitOn": "@triggerBody()",
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "azureautomation": {
+                    "connectionId": "/subscriptions/123456-123-123-123-12345678/resourceGroups/4besday6/providers/Microsoft.Web/connections/azureautomation",
+                    "connectionName": "azureautomation",
+                    "id": "/subscriptions/123456-123-123-123-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/azureautomation"
+                },
+                "teams": {
+                    "connectionId": "/subscriptions/123456-123-123-123-12345678/resourceGroups/4besday6/providers/Microsoft.Web/connections/teams",
+                    "connectionName": "teams",
+                    "id": "/subscriptions/123456-123-123-123-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/teams"
+                }
+            }
+        }
+    }
+}
