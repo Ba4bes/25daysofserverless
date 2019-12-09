@@ -2,15 +2,13 @@
 
 ## Process
 
-I really really really really tried to get a PowerShell Function App to talk to SignalR. I just couldn't get it. After a while I decided to go for a different route.
+Azure Function App
 
 This is a PowerShell Function App.
-The function SetStatus is an API for the elfs to set the current status.
-The function Front shows a website with the current status and when it was set.
+It gets triggered by a github webhook and talks to the Github API.
+Of coure it used emojis, because that makes everyhting better. 
 
-To get some sort of live updates there, I have set the webpage to reload every 30 seconds.
-
-![image](./html.PNG)
+![image](./comment.PNG)
 
 ## The Challenge
 
