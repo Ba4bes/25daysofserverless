@@ -6,42 +6,39 @@ Azure Function App
 
 This is a PowerShell Function App.
 It gets triggered by a github webhook and talks to the Github API.
-Of coure it used emojis, because that makes everyhting better. 
+Of course it used emojis, because that makes everything better. 
 
 ![image](./comment.PNG)
 
+## Call the function
+
+Want to see the function in action? Submit an issue at <https://github.com/Ba4bes/25daysofserverless>
+
 ## The Challenge
 
-### Status update
+### Ebenezer Scrooge
 
-*Sunday 8 December 2019*  
-It's December 8th and Santa and his team are hard at work preparing for the big night, including replacing many of the servers and applications that run the reindeer guidance and delivery systems.
+*Monday, 9 December*  
+Bah humbug! Ebenezer Scrooge is miserable this holiday season. He never says thank you and this makes everyone sad, even Scrooge. Let's lift his spirits by saying thank you to everyone who contributes to his OSS projects on GitHub.
 
-If something goes wrong with any part of that critical system, they need a way to report the status of disruptions to everyone involved in a successful Christmas morning.
+Do you feel good when someone says "thank you" when you contribute to a GitHub project? Let's use some holiday magic and serverless to automate this! After all, the holiday season is a time for smiling more and taking the time to say thank you to those around us.
 
-They need a basic version of what you can find at status.azure.com.
+We challenge you to automate creating a holiday themed "thank you" with serverless that replies to all issues created in one or more of your GitHub repositories
 
-During these tense disruptions, elves are actively diagnosing and working as quickly as possible to bring important systems back online. While response and remediation efforts are underway, it's important everyone who has a stake in the successful delivery of gifts stay "in the know".
+Say Happy Holidays in GitHub Issues
 
-We are tasked with building a method for Santa and his team to communicate the current status of service disruptions to a global audience. A "Status Page" solution.
+You can use any technologies you prefer to solve this challenge.
 
-Challenge
-Your challenge is to create a simple solution that helps inform elves and helpers all over the world when there is a problem with Santa's Reindeer Guidance & Delivery System - a "Status Page" to inform everyone what is known, what is being done, and when to expect additional information.
+Show us what you can build and join our Days of Serverless, with Challenge 9.
 
-Tips
-There are many approaches to broadcasting critical information like this. For simplicity, we might consider keeping the team informed by setting and broadcasting the current "Status" as 1 of 3 states:
-
-Open
-Closed
-Ongoing (or update)
-The "Open" state means we have a problem (Service Disruption / Offline). The "Closed" state means our problem is resolved (Service Restored / Online). The "Ongoing" state means we are still investigating (Standby for more updates).
+Enjoy your challenge and Happy Holidays!
 
 ## More information
 
  This site is running on an Azure Function App with PowerShell. Want to find out more about creating your own? Click [here]('https://4bes.nl/MSIgnite')
 
 Barbara Forbes  
-@Ba4bes  
+[@Ba4bes](https://www.twitter.com/ba4bes)  
 [4bes.nl](https://4bes.nl)  
 
 ![PowerShell Function App](https://4bes.nl/wp-content/uploads/2019/11/PSFunctionApp-300x252.png)
