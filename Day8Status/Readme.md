@@ -10,7 +10,7 @@ The function Front shows a website with the current status and when it was set.
 
 To get some sort of live updates there, I have set the webpage to reload every 30 seconds.
 
-![image](.\html.PNG)
+![image](./html.PNG)
 
 ## The Challenge
 
