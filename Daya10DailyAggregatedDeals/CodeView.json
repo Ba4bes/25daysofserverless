@@ -1,0 +1,126 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Compose": {
+                "inputs": {
+                    "$content": "<HTML><body><Style> BODY {font-family:verdana;} TABLE {border-width: 1px; border-style: solid; border-color: black; border-collapse: collapse;}TH {border-width: 1px; padding: 3px; border-style: solid; border-color: black; padding: 5px; background-color: #d1c3cd;}TD {border-width: 1px; padding: 3px; border-style: solid; border-color: black; padding: 5px}</style><Center><h1>The best deals of the day</h1>@{body('Create_HTML_table')}</body></html>",
+                    "$content-type": "text/html"
+                },
+                "runAfter": {
+                    "Create_HTML_table": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "compose"
+            },
+            "Create_HTML_table": {
+                "inputs": {
+                    "columns": [
+                        {
+                            "header": "Date",
+                            "value": "@formatDateTime(item()?['CreatedAtIso'],'yyyy-MM-dd hh:mm')"
+                        },
+                        {
+                            "header": "Tweededby",
+                            "value": "@item()['TweetedBy']"
+                        },
+                        {
+                            "header": "TweetText",
+                            "value": "@item()['TweetText']"
+                        }
+                    ],
+                    "format": "HTML",
+                    "from": "@body('Search_tweets')"
+                },
+                "runAfter": {
+                    "Search_tweets": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Table"
+            },
+            "Create_blob": {
+                "inputs": {
+                    "body": "@outputs('Compose')['$content']",
+                    "headers": {
+                        "Content-Type": "text/html"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureblob']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/datasets/default/files",
+                    "queries": {
+                        "folderPath": "/$web",
+                        "name": "index.html",
+                        "queryParametersSingleEncoded": true
+                    }
+                },
+                "runAfter": {
+                    "Compose": [
+                        "Succeeded"
+                    ]
+                },
+                "runtimeConfiguration": {
+                    "contentTransfer": {
+                        "transferMode": "Chunked"
+                    }
+                },
+                "type": "ApiConnection"
+            },
+            "Search_tweets": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['twitter']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/searchtweets",
+                    "queries": {
+                        "maxResults": 20,
+                        "searchQuery": "#DealoftheDay"
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "Recurrence": {
+                "recurrence": {
+                    "frequency": "Day",
+                    "interval": 1
+                },
+                "type": "recurrence"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "azureblob": {
+                    "connectionId": "/subscriptions/123456-1234-1234-12345678/resourceGroups/4besDay10/providers/Microsoft.Web/connections/azureblob",
+                    "connectionName": "azureblob",
+                    "id": "/subscriptions/123456-1234-1234-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/azureblob"
+                },
+                "twitter": {
+                    "connectionId": "/subscriptions/123456-1234-1234-12345678/resourceGroups/4besDay10/providers/Microsoft.Web/connections/twitter",
+                    "connectionName": "twitter",
+                    "id": "/subscriptions/123456-1234-1234-12345678/providers/Microsoft.Web/locations/westeurope/managedApis/twitter"
+                }
+            }
+        }
+    }
+}
