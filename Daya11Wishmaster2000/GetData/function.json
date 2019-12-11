@@ -1,0 +1,27 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "Request",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "Children",
+      "direction": "in",
+      "leaseCollectionName": "leases",
+      "connectionStringSetting": "4bes_DOCUMENTDB",
+      "databaseName": "Day11",
+      "collectionName": "Day11"
+    }
+  ]
+}
