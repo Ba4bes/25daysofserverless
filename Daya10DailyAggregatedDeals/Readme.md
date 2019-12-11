@@ -8,7 +8,7 @@ The hardest part for this one was parsing the data correctly to create HTML-file
 The code is in the CodeView.JSON file.
 I have used both the code view as the designerview to get the formatting where I wanted it
 
-![flow.png](.\flow.png)
+![flow.png](./flow.png)
 
 ## visit the site
 
