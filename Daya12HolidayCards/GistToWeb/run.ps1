@@ -4,7 +4,7 @@ using namespace System.Net
 param($Request, $TriggerMetadata)
 
 $GistID = $Request.Query.GistID
-# $GistID = "a7b2c78ea45ebd057d40d0db75062635"
+
 if ([string]::IsNullOrEmpty($GistID)) {
     $status = [HttpStatusCode]::BadRequest
     $body = "Please provide a GistID"
@@ -15,7 +15,9 @@ if ([string]::IsNullOrEmpty($GistID)) {
     Exit
 }
 
+# Get the gistfiles
 $Result = Invoke-Restmethod -Method GET -Uri "https://api.Github.com/gists/$GistID"
+
 
 $FileNames = $result.files | Get-Member -MemberType NoteProperty
 if ($FileNames.Count -gt 1) {
@@ -26,19 +28,19 @@ foreach ($File in $FileNames) {
     if ($Result.files.($File.Name).Language -eq "MarkDown") {
         $RawURL = $Result.files.($File.Name).raw_url
 
-        #Temporary store the Generated MD-file
-        $FileLocation = "D:\home\data\$($File.Name)"
-        Write-Output "File Location $FileLocation"
-        write-output "MDGIst $MDGist"
-        
-$c = Get-Content .\test.md
-ConvertFrom-Markdown -MarkdownContent ($c -join "`n") | Out-File .\test.html
-        $MDGist = Invoke-RestMethod -Method GET -Uri $RawURL | Out-File $FileLocation
-        write-output "MDGIst $MDGist"
-        $HTML = Get-Item $FileLocation | ConvertFrom-Markdown
+
+        $MDGist = Invoke-RestMethod -Method GET -Uri $RawURL
+        $Body = @{
+            "text" = $MDGist
+            "mode" = "markdown"
+
+        }
+        # Get output from the Github API
+        $response = Invoke-WebRequest -Method Post -Uri "https://api.github.com/markdown" -Body ($body | ConvertTo-Json)
+
         write-output "MDGIst $MDGist"
         Write-Output "HTML $HTML"
-        $HTMLFile = $HTML.HTML
+        $HTMLFile = $response.Content
 
         if ($FileNames.Count -gt 1) {
             $AllFiles.Add($HTMLFile)
@@ -50,7 +52,7 @@ ConvertFrom-Markdown -MarkdownContent ($c -join "`n") | Out-File .\test.html
 }
 if ($AllFiles.Count -gt 0) {
     $Status = [HttpStatusCode]::OK
-    $Body = $AllFiles
+    $Body = $AllFiles -join ""
 }
 Elseif ($HTMLFile) {
     $Status = [HttpStatusCode]::OK
@@ -75,7 +77,7 @@ else {
 
 # Associate values to output bindings by calling 'Push-OutputBinding'.
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-        StatusCode =
+        StatusCode  = $status
         ContentType = $ContentType
-        Body       = $body
+        Body        = $body
     })
