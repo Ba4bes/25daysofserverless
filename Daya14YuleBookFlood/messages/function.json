@@ -1,0 +1,27 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "Request",
+      "methods": [
+        "post",
+        "options",
+        "get"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
+    },
+    {
+      "type": "signalR",
+      "name": "SignalRMessages",
+      "hubName": "chat",
+      "direction": "out"
+    }
+  ]
+}
