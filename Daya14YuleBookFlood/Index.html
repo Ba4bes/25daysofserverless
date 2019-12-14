@@ -1,0 +1,76 @@
+<html>
+  <body>
+    <div id="app">
+      <h2>
+        User
+      </h2>
+      <div>
+        <input type="text" v-model="user" placeholder="user name" />
+      </div>
+      <div><center>
+          <input type="text" v-model="newMessage" id="message-box" class="form-control"
+            placeholder="Type message here..." autocomplete="off" />
+        <button @click="sendMessage">Send message</button></center>
+      </div>
+      <p><h2>Messages</h2>
+      <div v-for="message in messages">
+        <strong>{{message.sender}}</strong> {{message.text}}
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1.1.2/dist/browser/signalr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <script>
+      const data = {
+        user: 'Enter your username here',
+        messages: [],
+        newMessage: ''
+      }
+
+      const app = new Vue({
+        el: '#app',    
+        data: data,
+        methods: {
+          sendMessage() {
+            createMessage(this.user, this.newMessage);
+          }
+        }
+      });
+
+      const apiBaseUrl = 'https://4besday14.azurewebsites.net';
+
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl(`${apiBaseUrl}/api`)
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+      console.log('connecting...');
+      connection.start()
+        .then((response) => {
+          console.log('connection established', response);
+      })
+        .catch(logError);
+
+      connection.on('newMessage', newMessage);
+
+      function newMessage(message) {
+        data.messages = [...data.messages, {...message}]
+      }
+
+      function logError(err) {
+        console.error('Error establishing connection', err);
+      }
+
+      function createMessage(sender, messageText) {
+        return axios.post(`${apiBaseUrl}/api/messages`, {
+          sender: sender,
+          text: messageText
+        }).then(resp => {
+          console.log('message sent', resp);
+        });
+      }
+
+    </script>
+  </body>
+</html>

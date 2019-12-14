@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework><netstandard2 class="1"></netstandard2></TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
 	<WarningsAsErrors></WarningsAsErrors>
 	<DefaultItemExcludes>**</DefaultItemExcludes>
   </PropertyGroup>
