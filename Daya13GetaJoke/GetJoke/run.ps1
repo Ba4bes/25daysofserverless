@@ -19,7 +19,7 @@ Tell us if this is a good joke<p>
 <br>
 <input type='hidden' name='id' value='$($RandomResult.id)'><p>
 <input type='hidden' name='Score' value='$($RandomResult.Score)'><p>
-<input type='hidden' name='Line' value='$($RandomResult.Score)'><p>
+<input type='hidden' name='Line' value='$($RandomResult.Line)'><p>
   <input type='radio' name='Result' value='Yes' checked> Yes<br>
   <input type='radio' name='Result' value='No'> No<br>
 
