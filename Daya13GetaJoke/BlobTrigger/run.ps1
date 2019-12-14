@@ -1,5 +1,5 @@
 # Input bindings are passed in via param block.
-param([string] $InputBlob, $TriggerMetadata)
+param([string]$InputBlob, $TriggerMetadata)
 
 # Write out the blob name and size to the information log.
 Write-Host "PowerShell Blob trigger function Processed blob! Name: $($TriggerMetadata.Name) Size: $($InputBlob.Length) bytes"
@@ -10,11 +10,12 @@ $analyticsheader = @{
     "Content-Type"              = "application/json"
 }
 
-
 $score = 1
 $Array = @()
+Write-Output "starting INputarray"
 $inputarray = $inputBlob.Split([Environment]::NewLine, [StringSplitOptions]::RemoveEmptyEntries)
 #$Content = Get-Content ".\Jokes.txt"
+Write-output "starting foreachloop"
 foreach ($Line in $InputArray) {
 
     $abody = @{
@@ -27,7 +28,7 @@ foreach ($Line in $InputArray) {
     $Score = Invoke-RestMethod -Method POST -Body $Body -Headers $analyticsheader -uri "https://westeurope.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment"
 
     $Object = [PSCustomObject]@{
-        ID    = $Line
+        id    = (New-guid).Guid
         Line  = $Line
         Score = $score.documents.Score
     }

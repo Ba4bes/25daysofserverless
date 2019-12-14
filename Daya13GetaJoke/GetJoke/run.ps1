@@ -17,9 +17,9 @@ This joke has a score of $($RandomResult.Score)<br>
 Tell us if this is a good joke<p>
 <form action='https://4besday13.azurewebsites.net/api/ChangeScore'>
 <br>
-<input type='hidden' name='ID' value='$($RandomResult.ID)'><p>
+<input type='hidden' name='id' value='$($RandomResult.id)'><p>
 <input type='hidden' name='Score' value='$($RandomResult.Score)'><p>
-
+<input type='hidden' name='Line' value='$($RandomResult.Score)'><p>
   <input type='radio' name='Result' value='Yes' checked> Yes<br>
   <input type='radio' name='Result' value='No'> No<br>
 

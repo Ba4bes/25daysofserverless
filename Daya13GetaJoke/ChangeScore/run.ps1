@@ -12,11 +12,11 @@ Switch ($Request.Query.Result) {
     Default { Continue }
 }
 $Object = [PSCustomObject]@{
-    ID    = $Request.Query.ID
-    Line  = $Request.Query.ID
+    id    = $Request.Query.id
+    Line  = $Request.Query.Line
     Score = $Score
 }
-Write-host "Changed line:" $Object.ID
+Write-host "Changed line:" $Object.id
 Write-Host "New Score:" $Object.Score
 $status = [HttpStatusCode]::OK
 $body = "Thank you! Your message has been received"
