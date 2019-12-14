@@ -1,0 +1,20 @@
+{
+  "bindings": [
+    {
+      "name": "InputBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "samples-workitems/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "Documents",
+      "direction": "out",
+      "leaseCollectionName": "leases",
+      "connectionStringSetting": "4bes_DOCUMENTDB",
+      "databaseName": "Day13",
+      "collectionName": "Day13"
+    }
+  ]
+}
