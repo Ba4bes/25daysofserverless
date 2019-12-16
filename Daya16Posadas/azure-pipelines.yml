@@ -32,6 +32,8 @@ stages:
         $NewScript | Out-File "$(Build.SourcesDirectory)\Daya16Posadas\FunctionApp\Get-Location\run.ps1"
       displayName: 'Create new Function File with CSV'
   - job: Build_FA
+    dependsOn:
+      Test_FA
     pool:
       vmImage: windows-2019
     steps:
