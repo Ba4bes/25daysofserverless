@@ -25,6 +25,13 @@ stages:
         location: 'west Europe'
         csmFile: Daya16Posadas/Deployment/azuredeploy.json
         deploymentMode: Validation
+
+  - job: Build_FA
+    dependsOn:
+      Test_FA
+    pool:
+      vmImage: windows-2019
+    steps:
     - powershell: |
         $Alldata = Import-CSV $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV
         $AllDataHTML = $AllData | ConvertTo-Html
@@ -36,12 +43,6 @@ stages:
         $NewScript | Out-File "$(Build.SourcesDirectory)/Daya16Posadas/FunctionApp/Get-Location/run.ps1" -force
       displayName: 'Create new Function File with CSV'
 
-  - job: Build_FA
-    dependsOn:
-      Test_FA
-    pool:
-      vmImage: windows-2019
-    steps:
     - task: ArchiveFiles@2
       displayName: 'Archive FunctionApp'
       inputs:
