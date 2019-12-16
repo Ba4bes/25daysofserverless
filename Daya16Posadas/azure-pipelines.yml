@@ -7,7 +7,7 @@ variables:
 trigger:
   branches:
     include:
-    - 'Master'  # must quote since "*" is a YAML reserved character; we want a string
+    - 'Master' 
 
 stages:
 
