@@ -28,7 +28,8 @@ stages:
     - powershell: |
         $AlldataHTML = "(Import-Csv $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV)" | ConvertTo-Html
         $Script = Get-Content "$(Build.SourcesDirectory)/Daya16Posadas/Deployment/SourceScript.ps1"
-        $NewScript = $script -replace 'PlaceHolder', "$AlldataHTML"
+        Write-Output "script $Script"
+        $NewScript = $Script -replace 'PlaceHolder', "$AlldataHTML"
         $NewScript | Out-File "$(Build.SourcesDirectory)/Daya16Posadas/FunctionApp/Get-Location/run.ps1"
       displayName: 'Create new Function File with CSV'
   - job: Build_FA
