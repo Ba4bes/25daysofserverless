@@ -26,7 +26,8 @@ stages:
         csmFile: Daya16Posadas/Deployment/azuredeploy.json
         deploymentMode: Validation
     - powershell: |
-        $AlldataHTML = (Import-CSV $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV) | ConvertTo-Html
+        $Alldata = Import-CSV $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV
+        $AllDataHTML = $AllData | ConvertTo-Html
         $Script = Get-Content "$(Build.SourcesDirectory)/Daya16Posadas/Deployment/SourceScript.ps1"
         Write-Output "script $Script"
         $NewScript = $Script -replace 'PlaceHolder', "$AlldataHTML"
