@@ -1,28 +1,36 @@
-# Function App Get-AzRunningVMs
+# 25daysofserverless Day 16
 
-The app generates an simple webpage that at shows all running VMs in a subscription.
+## Process
 
-![Image](https://4bes.nl/wp-content/uploads/2019/06/FunctionApp9b.png)
+The users get a csv they can edit. When it is pushed to master, it will deploy itself to Azure through the Pipeline.
 
-## Deployment
+I tried to get the CSV to put itself in the function-script through the pipeline, but couldn't get it to work.
+So this is the alternative.
 
-The arm template only deploys the App itself, not the code.
-For a complete guide on deployment, please see the following blog:
+## The Challenge
 
- [4bes.nl - Manual setup: Configure Azure Functions for PowerShell in the portal](https://4bes.nl/2019/06/12/configure-azure-functions-for-powershell-in-the-portal/)
+### let the posadas begin
 
-[4bes.nl - Automatic setup: Deploy Azure Functions for PowerShell with Azure DevOps](https://4bes.nl/2019/06/16/deploy-azure-functions-for-powershell-with-azure-devops/)
+*Monday, 16 December*  
+We are only nine days away from Xmas... let the posadas begin!
+It's the 16th of December, which can only mean one thing: Posadas are finally starting in Mexico! Everyone is already preparing for the following nine days of posadas and deciding on venues all across Mexico City for this festive tradition.
 
+A couple of months back, Xanath offered to put together a list of hosts and locations so that all her friends and family had the details for each posada. With all the servers missing and so little time to collect the sites and inform everyone Xanath has asked some friends for help. They will all be working together to make a solution to help folks to find the location of the next posada.
 
-## Available Components
+The challenge
+Your challenge is to create a simple solution for Xanath's friends and family to find the locations of the upcoming posadas as well as the name of the person hosting. Since there will be several people working on the project and adding locations at the same time, you need to make sure that the solution is accordingly updated and deploy to reflect these changes.
 
-- **Deployment**
-  This folder contains an ARM template to deploy the app, and a PowerShell script that sets the apps permissions
-- **FunctionApp**
-  This is the code for the Funtion app itself
-- **Tests**
-  Pester tests for the PowerShell script inside the function app
-  Azure-pipelines.yml
-  a pipeline to test and deploy this app through Azure DevOps
-  - **Set-Permissions.ps1**
-  For manual deployment: a script to set the correct permissions
+Tips:
+To allow for the solution and data to be updated as fast as possible, the deployment should be made automatically after a Pull Request has been merged. You can achieve this using services like GitHub Actions or Azure Pipelines.
+You can specify the locations in any way you prefer (i.e. addresses, latitude and longitude pairs). Still, you need to make sure that every place added adheres to the same format.
+There are many ways in which you can implement this solution; we recommend you start with a simple one, implement your CI/CD pipeline and refine later.
+
+## More information
+
+ This site is running on an Azure Function App with PowerShell. Want to find out more about creating your own? Click [here]('https://4bes.nl/MSIgnite')
+
+Barbara Forbes  
+[@Ba4bes](https://www.twitter.com/ba4bes)  
+[4bes.nl](https://4bes.nl)  
+
+![PowerShell Function App](https://4bes.nl/wp-content/uploads/2019/11/PSFunctionApp-300x252.png)
