@@ -2,7 +2,7 @@ using namespace System.Net
 
 # Input bindings are passed in via param block.
 param($Request)
-$AlldataHTML = (Import-CSV "$PWD\DeployResource\Get-Location/Locations.CSV") | ConvertTo-Html
+$AlldataHTML = (Import-CSV "$PWD\Get-Location\Locations.CSV") | ConvertTo-Html
 
     $HTML = @"
 <style>
