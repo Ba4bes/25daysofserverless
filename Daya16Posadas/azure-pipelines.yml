@@ -23,13 +23,13 @@ stages:
         azureSubscription: $(AzureConnection)
         resourceGroupName: $(ResourcegGroupName)
         location: 'west Europe'
-        csmFile: Deployment/azuredeploy.json
+        csmFile: Daya16Posadas/Deployment/azuredeploy.json
         deploymentMode: Validation
     - powershell: |
-        $AlldataHTML = "(Import-Csv $(Build.SourcesDirectory)/Locations.CSV)" | ConvertTo-Html
-        $Script = Get-Content "$(Build.SourcesDirectory)/SourceScript.ps1"
+        $AlldataHTML = "(Import-Csv $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV)" | ConvertTo-Html
+        $Script = Get-Content "$(Build.SourcesDirectory)/Daya16Posadas/SourceScript.ps1"
         $NewScript = $script -replace 'PlaceHolder', "$AlldataHTML"
-        $NewScript | Out-File "$(Build.SourcesDirectory)/FunctionApp/Get-Location\run.ps1"
+        $NewScript | Out-File "$(Build.SourcesDirectory)/Daya16Posadas/FunctionApp/Get-Location\run.ps1"
       displayName: 'Create new Function File with CSV'
   - job: Build_FA
     pool:
@@ -38,7 +38,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive FunctionApp'
       inputs:
-        rootFolderOrFile: FunctionApp
+        rootFolderOrFile: Daya16Posadas/FunctionApp
         includeRootFolder: false
         archiveFile: '$(System.DefaultWorkingDirectory)/zip/FunctionApp.zip'
     - task: PublishPipelineArtifact@0
@@ -62,8 +62,8 @@ stages:
         azureSubscription: $(AzureConnection)
         resourceGroupName: $(ResourcegGroupName)
         location: 'West Europe'
-        csmFile: Deployment/azuredeploy.json
-        csmParametersFile: Deployment/azuredeploy.parameters.json
+        csmFile: Daya16Posadas/Deployment/azuredeploy.json
+        csmParametersFile: Daya16Posadas/Deployment/azuredeploy.parameters.json
         overrideParameters: '-functionAppName $(FunctionAppName)'
         deploymentMode: Incremental
         deploymentOutputs: DeploymentOutput
