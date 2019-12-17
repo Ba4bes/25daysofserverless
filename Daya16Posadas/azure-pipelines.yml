@@ -25,12 +25,7 @@ stages:
         location: 'west Europe'
         csmFile: Daya16Posadas/Deployment/azuredeploy.json
         deploymentMode: Validation
-    - powershell: |
-        $AlldataHTML = "(Import-Csv $(Build.SourcesDirectory)/Daya16Posadas/Locations.CSV)" | ConvertTo-Html
-        $Script = Get-Content "$(Build.SourcesDirectory)/Daya16Posadas/Deployment/SourceScript.ps1"
-        $NewScript = $script -replace 'PlaceHolder', "$AlldataHTML"
-        $NewScript | Out-File "$(Build.SourcesDirectory)\Daya16Posadas\FunctionApp\Get-Location\run.ps1"
-      displayName: 'Create new Function File with CSV'
+
   - job: Build_FA
     dependsOn:
       Test_FA
@@ -40,7 +35,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive FunctionApp'
       inputs:
-        rootFolderOrFile: Daya16Posadas\FunctionApp
+        rootFolderOrFile: Daya16Posadas/FunctionApp
         includeRootFolder: false
         archiveFile: '$(System.DefaultWorkingDirectory)/zip/FunctionApp.zip'
     - task: PublishPipelineArtifact@0
