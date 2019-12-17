@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "eventHubMessages",
+      "direction": "in",
+      "eventHubName": "iothub",
+      "connection": "4besday17",
+      "cardinality": "many",
+      "consumerGroup": "$Default"
+    }
+  ]
+}
