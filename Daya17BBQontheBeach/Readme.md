@@ -10,7 +10,7 @@ The raspberry pi creates an event hub messages, which triggers the Function App.
 I didn't have the time to wait for a twitter developer account and I don't really want to do that with my main account.
 (I think this would have been possible with logic app though). So instead the function posts a message to Teams.
 
-![screenshot](.\screenshot.PNG)
+![screenshot](./screenshot.PNG)
 
 ## The Challenge
 
