@@ -6,7 +6,7 @@ This Function App takes a picture from the a storage blob and connects to Comput
 
 There was not defined what the output should be. But I was looking for a reason to try Sendgrid, so I connected the app to Sendgrid so it can send emails.
 
-![screenshot](./example.jpg)
+![screenshot](./example.png)
 
 ## The Challenge
 
