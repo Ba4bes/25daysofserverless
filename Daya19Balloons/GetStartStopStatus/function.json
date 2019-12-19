@@ -1,0 +1,20 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "eventHubMessages",
+      "direction": "in",
+      "eventHubName": "samples-workitems",
+      "connection": "4besday17HUB_events_IOTHUB",
+      "cardinality": "many",
+      "consumerGroup": "$Default"
+    },
+    {
+      "name": "OutputBlob",
+      "type": "blob",
+      "path": "samples-workitems/LastEvent",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ]
+}
