@@ -1,0 +1,39 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "Request",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "dbin",
+      "direction": "in",
+      "leaseCollectionName": "leases",
+      "connectionStringSetting": "4bes_DOCUMENTDB",
+      "databaseName": "Day13",
+      "collectionName": "Day20"
+      
+    },
+    {
+      "type": "cosmosDB",
+      "name": "dbout",
+      "direction": "out",
+      "leaseCollectionName": "leases",
+      "connectionStringSetting": "4bes_DOCUMENTDB",
+      "databaseName": "Day13",
+      "collectionName": "Day20"
+      
+    }
+  ]
+}
