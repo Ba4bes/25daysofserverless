@@ -8,7 +8,7 @@ Ther is no need for a Twitter developer account or keyvault.
 I have made the connection to Twitter through the Logic App. It takes all tweets with Gavlebocken in them and retweets them.
 The design looks like this
 
-![logicapp](./logicappoverview.png)
+![logicapp](./LogicAppoverview.PNG)
 
 This results in tweets being retweeted as they appear
 ![tweet](./RetweetedTweet.PNG).
