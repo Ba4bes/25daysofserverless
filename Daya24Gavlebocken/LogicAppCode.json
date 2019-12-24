@@ -1,0 +1,85 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Get_user": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['twitter']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/user",
+                    "queries": {
+                        "userName": "@{triggerBody()['TweetedBy']}"
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            },
+            "Retweet": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['twitter']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/retweet",
+                    "queries": {
+                        "trimUser": false,
+                        "tweetId": "@triggerBody()?['TweetId']"
+                    }
+                },
+                "runAfter": {
+                    "Get_user": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_new_tweet_appears": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['twitter']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/onnewtweet",
+                    "queries": {
+                        "searchQuery": "#gävlebocken"
+                    }
+                },
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 3
+                },
+                "splitOn": "@triggerBody()?['value']",
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "twitter": {
+                    "connectionId": "/subscriptions/[subID]/resourceGroups/4besDay24/providers/Microsoft.Web/connections/twitter",
+                    "connectionName": "twitter",
+                    "id": "/subscriptions/[subID]/providers/Microsoft.Web/locations/westeurope/managedApis/twitter"
+                }
+            }
+        }
+    }
+}
