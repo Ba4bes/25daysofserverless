@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "InputBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "samples-workitems/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "OutputBlob",
+      "type": "blob",
+      "path": "recipes/text.txt",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ]
+}
