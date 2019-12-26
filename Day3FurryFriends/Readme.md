@@ -1,10 +1,19 @@
 # 25daysofserverless Day 3
 
+This script has been cleaned up since the original submission for the challenge.
+
+[Original submission](https://github.com/Ba4bes/25daysofserverless/tree/e588479bfae9129678ee3859415847667c5b40af)
+
 ## Call the function
 
-The function will be triggered by a Github webhook. It takes the input and checks the files for png-extensions.
-I have taken the easy way with the output and created a message in a storage queue, as I already knew how it works. If I have more time I might see if I can attach a database. 
+The function will be triggered by a Github web hook. It takes the input and checks the files for png-extensions.
+The Web Hook settings on Github are like this:
 
+![github screenshot](.\PNGs\GitHubWebHook.PNG)
+
+I have taken the easy way with the output and created a message in a storage queue, as I already knew how it works.
+
+![storage screenshot](.\PNGs\messagequeue.PNG)
 
 ## The Challenge
 
