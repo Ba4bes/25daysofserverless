@@ -1,8 +1,3 @@
-[](https://www.pacdv.com/sounds/voices-3.html)
-
-
-http://www.moviewavs.com/php/sounds/?id=gog&media=WAVS&type=Movies&movie=Good_Morning_Vietnam&quote=opening.txt&file=opening.wav
-
 # 25daysofserverless Day 25
 
 ## Azure Function App
