@@ -15,6 +15,13 @@ This results in tweets being retweeted as they appear
 
 The connection in the logic app has it's own permission settings, so it can be very secure. Add on MFA and Privileged identity management and the risk is becoming very low!
 
+Update 27/12:
+I hadn't considered the risk of retweeting negative tweets :-o  
+Luckily [Jennifer Davis](https://twitter.com/sigje) warned me for those.
+So I have added a Cognitive services connection that checks the Sentiment of the tweet and only retweets positive tweets
+
+![logicappadd](./LAOverview.PNG)
+
 ## The Challenge
 
 ### Gävlebocken

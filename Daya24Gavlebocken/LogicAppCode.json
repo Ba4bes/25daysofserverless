@@ -2,6 +2,64 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
+            "Condition": {
+                "actions": {
+                    "Retweet": {
+                        "inputs": {
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['twitter']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/retweet",
+                            "queries": {
+                                "trimUser": false,
+                                "tweetId": "@triggerBody()?['TweetId']"
+                            }
+                        },
+                        "runAfter": {},
+                        "type": "ApiConnection"
+                    }
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "greater": [
+                                "@body('Detect_Sentiment')?['score']",
+                                0.5
+                            ]
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Detect_Sentiment": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "If"
+            },
+            "Detect_Sentiment": {
+                "inputs": {
+                    "body": {
+                        "language": "en",
+                        "text": "@triggerBody()?['TweetText']"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/text/analytics/v2.1/sentiment"
+                },
+                "runAfter": {
+                    "Get_user": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
             "Get_user": {
                 "inputs": {
                     "host": {
@@ -16,27 +74,6 @@
                     }
                 },
                 "runAfter": {},
-                "type": "ApiConnection"
-            },
-            "Retweet": {
-                "inputs": {
-                    "host": {
-                        "connection": {
-                            "name": "@parameters('$connections')['twitter']['connectionId']"
-                        }
-                    },
-                    "method": "post",
-                    "path": "/retweet",
-                    "queries": {
-                        "trimUser": false,
-                        "tweetId": "@triggerBody()?['TweetId']"
-                    }
-                },
-                "runAfter": {
-                    "Get_user": [
-                        "Succeeded"
-                    ]
-                },
                 "type": "ApiConnection"
             }
         },
@@ -74,10 +111,15 @@
     "parameters": {
         "$connections": {
             "value": {
+                "cognitiveservicestextanalytics": {
+                    "connectionId": "/subscriptions/[subId]/resourceGroups/4besDay24/providers/Microsoft.Web/connections/cognitiveservicestextanalytics",
+                    "connectionName": "cognitiveservicestextanalytics",
+                    "id": "/subscriptions/[subId]/providers/Microsoft.Web/locations/westeurope/managedApis/cognitiveservicestextanalytics"
+                },
                 "twitter": {
-                    "connectionId": "/subscriptions/[subID]/resourceGroups/4besDay24/providers/Microsoft.Web/connections/twitter",
+                    "connectionId": "/subscriptions/[subId]/resourceGroups/4besDay24/providers/Microsoft.Web/connections/twitter",
                     "connectionName": "twitter",
-                    "id": "/subscriptions/[subID]/providers/Microsoft.Web/locations/westeurope/managedApis/twitter"
+                    "id": "/subscriptions/[subId]/providers/Microsoft.Web/locations/westeurope/managedApis/twitter"
                 }
             }
         }
