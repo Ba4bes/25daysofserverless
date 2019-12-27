@@ -5,29 +5,35 @@
 Now this was a real challenge. I have searched and searched and found absolutely no documentation about connecting a PowerShell Function app to a Cosmos DB (or any db for that matter).
 So I had to find out on my own. The code around it is a bit sloppy, but I guess I have a new blog post to write now. :)
 
-The function AddMeal is able to add an entry or change an entry like this:
+**Update**: I have cleaned up the code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/430c7036b224d9dc75b3ce66accd65aa2a54f44d/Day4potluck)
+
+The function AddMeal is able to add an entry or change an entry using the POST or PATCH Method, it accepts a JSON object
 
 ```PowerShell
-Invoke-RestMethod -Uri "https://4besday4.azurewebsites.net/api/AddMeal?Cook=Harry&Meal=Candy"
+$Body = @{
+    Cook = "Harry"
+    Meal = "Bread"
+}
+Invoke-RestMethod -Method POST -Uri "https://4besday4.azurewebsites.net/api/AddMeal" -Body ($body | ConvertTo-Json) -ContentType application/json
+Thank you Harry!, your meal Bread has been added
+
+$Body = @{
+    Cook = "Harry"
+    Meal = "Candy"
+}
+Invoke-RestMethod -Method PATCH -Uri "https://4besday4.azurewebsites.net/api/AddMeal" -Body ($body | ConvertTo-Json) -ContentType application/json
 Thank you Harry!, your meal Candy has been added
-
-Invoke-RestMethod -Uri "https://4besday4.azurewebsites.net/api/AddMeal?Cook=Harry&Meal=Cake"
-Thank you Harry!, your meal Cake has been added
 ```
 
-The db-info can be grabbed through the function GetMeal
+The current Database entries can be grabbed through the function GetMeal
 
 ```PowerShell
- Invoke-RestMethod -Uri "https://4besday4.azurewebsites.net/api/GetMeal"
+ Invoke-RestMethod -Method GET -Uri "https://4besday4.azurewebsites.net/api/GetMeal"
 
-Cook  Meal
-----  ----
-Henk  Sausage
-Mary  Soup
-Harry Cake
+Message                   Success data
+-------                   ------- ----
+5 objects have been found $true   {@{Cook=henk; Meal=bloib}, @{Cook=hank; Meal=bloib}, @{Cook=Fred; Meal=Cookie}, @{Cook=Beppie; Meal=Cow}…}
 ```
-
-Like I said, not the cleanest as I was running out of time. To be continued :-)
 
 ## The Challenge
 

@@ -6,8 +6,7 @@
       "direction": "in",
       "name": "Request",
       "methods": [
-        "get",
-        "post"
+        "get"
       ]
     },
     {
@@ -17,13 +16,12 @@
     },
     {
       "type": "cosmosDB",
-      "name": "mealdb",
+      "name": "mealdbin",
       "direction": "in",
-      "leaseCollectionName": "leases",
       "connectionStringSetting": "4bes_DOCUMENTDB",
-      "databaseName": "PotLuck",
-      "collectionName": "potluck"
-      
+      "leaseCollectionName": "leases",
+      "databaseName": "Day13",
+      "collectionName": "Day3"
     }
   ]
 }
