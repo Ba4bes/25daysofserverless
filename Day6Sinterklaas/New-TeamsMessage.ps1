@@ -1,4 +1,18 @@
-[CmdletBinding()]
+<#
+.SYNOPSIS
+    This simple function sends a message to teams
+.DESCRIPTION
+    The function takes input and sends it to teams through a webhook
+.PARAMETER Message
+    String, the message that needs to be send.
+.EXAMPLE
+    New-TeamsMessage -Message "this is a message"
+.NOTES
+    This is an Automation account runbook, originally made for 25DaysofServerless.com
+    Made by Barbara Forbes
+    @Ba4bes
+    4bes.nl
+#>
 Param(
     [Parameter(Mandatory = $true)]
     [String]$Message

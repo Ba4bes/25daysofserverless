@@ -1,22 +1,25 @@
-# 25daysofserverless Day 5
+# 25daysofserverless Day 6
 
 ![.\teams-channel.PNG](.\teams-channel.PNG)
+
 ## Process
 
-Well the first issue was very clear: Durable functions are not available yet for PowerShell in Function Apps
+**Update**: I have cleaned up this code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/12ce556dc15927df13143577bfc8a46d4d450dc5/Day6Sinterklaas)
+
+Well the first issue was very clear: Durable functions are not available yet for PowerShell in Function Apps.
 
 I spend a lot of time fooling around in creating a function from a function. I believe it can be done, but it was taking to much time.
 
-So I went a different route. Scheduling can actually be done with an Azure Automation Account. I had done this before and written blogposts about it. 
+So I went a different route. Scheduling can actually be done with an Azure Automation Account. I had done this before and written blog posts about it.
 
 So I copied my own script from [https://4bes.nl/2019/02/08/script-create-linked-runbookschedules-with-powershell/](here) and changed it for this situation.
-I allowed this schedule to start a runbook that posts a team message as my communication channel.
+I allowed this schedule to start a run book that posts a team message as my communication channel.
 
 To give Teams an option to be a trigger, I have used Logic Apps. I actually had a [https://4bes.nl/2019/02/18/using-logic-apps-trigger-an-azure-runbook-with-an-office365-calendar-appointment/](blogpost) for this as well.
 
-The extra challenge was the datetime element. I couldn't use the option in the challenge, so I started writing a PowerShell option. Time is short so I have put a few options in there. So this is great for the feature.
+The extra challenge was the datetime element. I couldn't use the option in the challenge, so I started writing a PowerShell option. Time is short so I have put a few options in there. So this is great for the future.
 
-And then I realized Azure has a different timezone... I was running out of time so I did an ugly workaround, I did it hardcoded for my own timezone.
+And then I realized Azure has a different timezone... The timezone is now set manually at the top of the script, as I am not sure how I could pass the local computertime to Azure.
 
 So some workarounds, but at least it is working
 
@@ -33,7 +36,7 @@ Build a chat integration for your favorite chat service (e.g. Discord or Slack) 
 
 ## More information
 
-# Useful links
+## Useful links
 
 Barbara Forbes  
 @Ba4bes  
