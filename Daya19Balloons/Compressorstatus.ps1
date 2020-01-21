@@ -1,6 +1,6 @@
 
 $header = @{
-    Authorization = "SharedAccessSignature sr=4besday17HUB.azure-devices.net%2Fdevices%2FCompressor&sig=qWahXinfvZrUngX37C%2Fs%2FWo7nrM9NIzuj0v1AWJpeyE%3D&se=1576789931"
+    Authorization = "SharedAccessSignature sr=KEY"
 }
 $datetime = Get-Date
 $Body = @{
