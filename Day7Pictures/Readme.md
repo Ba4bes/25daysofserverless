@@ -2,11 +2,20 @@
 
 ## Process
 
+**Update**: I have cleaned up this code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/65359ca9a7ed21d9b660e02ee37c27c9113ebd11/Day7Pictures)
+
+
 Two functions in an App for this one. Of course I use PowerShell.
 It is a bit weird to use HTML within PowerShell, but it works.
 
 The first function, FrontPage, collects the input from the user.
+It does so by creating a simple HTML web form. The results of the form are send to the second function
+
 The second funtion connects to the UnSplash API and collects an image. 
+It returns the image in an HTML page to the browser.
+The UnsplashAPIkey is stored in the environment variables of the function
+
+To make the URL cleaner I have removed the API-part through the host.json file
 
 ## Call the function
 
