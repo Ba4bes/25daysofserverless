@@ -2,6 +2,11 @@
 
 ## Process
 
+*Update: For this challenge, I originally submitted the files in the folder Day8v1.*  
+*I have since created a new function app that fits the challenge better and has cleaned up code.*
+
+### original: Day8v1
+
 I really really really really tried to get a PowerShell Function App to talk to SignalR. I just couldn't get it. After a while I decided to go for a different route.
 
 This is a PowerShell Function App.
@@ -10,7 +15,20 @@ The function Front shows a website with the current status and when it was set.
 
 To get some sort of live updates there, I have set the webpage to reload every 30 seconds.
 
-![image](./html.PNG)
+![image](./Day8v1/html.PNG)
+
+### Update: Day8v2
+
+With a bit more time and the experience from the challenge in Day14, I have updated this app to actually use SignalR.
+
+The resulting page is <http://4besday8status.azurewebsites.net/>  
+And messages can be added through <https://4besday8v2.azurewebsites.net/api/FrontPage>
+
+You need to open the status page first, otherwise the update doesn't come through. This does mean that the updates are only in realtime, the page will be empty when opened.
+The front page is a simple web form that will take the input that needs to be on the status page
+
+This is passed on to the Message function, which adds a date and connects to SignalR.
+SignalR is called from a web app where the status is displayed. This page is in Javascript and I will say I have really copied some code from [this blog](https://dev.to/azure/how-you-can-learn-to-build-real-time-web-apps-using-net-core-c-and-azure-signalr-service-and-some-javascript-27b0) and tried to change it into what it is now. I do not speak javascript :).
 
 ## The Challenge
 

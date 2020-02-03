@@ -17,13 +17,14 @@ Almost all of these are Azure Function Apps that use PowerShell. In this table y
 |5 |HTTP |HTTP | Key Vault, Cognitive services |
 |6 | | | Logic App, Azure Automation Account, Teams |
 |7 | HTTP | HTTP | Unsplash API, HTML form |
-|8 | HTTP| HTTP |  |
+|8v1 | HTTP| HTTP |  |
+|8v2 | HTTP| SignalR, HTTP | SignalR service, WebApp  |
 |9 | HTTP|HTTP | GitHub API |
 |10 | | | Logic App, Twitter connector |
 |11 | CosmosDB, HTTP | CosmosDB, HTTP | CosmosDB, HTML form, Teams |
 |12 | HTTP| HTTP |GitHub Api, Github Markdown API |
 |13 | Blob Storage, CosmosDB, HTTP | CosmosDB, HTTP | Cognitive services |
-|14 | HTTP | HTTP, SignalR | SignalR service |
+|14 | HTTP | HTTP, SignalR | SignalR service, WebApp |
 |15 | HTTP | HTTP | HTML form, Cognitive services |
 |16 | HTTP | HTTP | Azure DevOps pipeline |
 |17 | EventHub | |IOT hub, Teams |
