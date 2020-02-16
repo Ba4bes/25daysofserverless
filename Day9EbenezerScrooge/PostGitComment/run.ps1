@@ -1,36 +1,62 @@
 using namespace System.Net
-
+<#
+.SYNOPSIS
+    This script will create a github comment when a new issue is created
+.DESCRIPTION
+    This script will be called by a webhook at the Github repository.
+    If a new issue was placed, it will create a comment for the issue
+.INPUTS
+    Schould be called by the Github API with a webhook.
+    The request should contain information from the repository
+.OUTPUTS
+    The call is answered with a status code.
+    An API call is made to Github to create a new comment
+.NOTES
+    This is an Azure Function App, originally made for 25DaysofServerless.com
+    Made by Barbara Forbes
+    @Ba4bes
+    4bes.nl
+#>
 # Input bindings are passed in via param block.
 param($Request, $TriggerMetadata)
 
 # Write to the Azure Functions log stream.
 Write-Output $Request.Body
 
-$body = $request.Body
+# Collect information from the input from GitHub
+$Body = $request.Body
 $username = $body.issue.user.login
-if ($body.action -eq "Opened"){
-   $outBody = " :christmas_tree: Hello $username, Thank you for your message :sparkles: :smiley:. "
 
+# Results are only needed if a new issue is opened.
+if ($Body.action -eq "Opened") {
+    $OutputBody = " :christmas_tree: Hello $username, Thank you for your message :sparkles: :smiley:. "
 
-$body.issue.title
-$body.issue.user
-$body.action
+    # The credentials are saved in the Environment credentials
+    [string]$token = $ENV:GHtoken
+    [string]$user = $ENV:GHUser
+    # Create a header to give back to the Github API
+    $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $User, $Token)))
+    $Header = @{
+        Authorization = ("Basic {0}" -f $base64AuthInfo)
+    }
+    Write-Output "body" $OutputBody
+    # Create the body for the Github API
+    $BodyJSON = (@{Body = $OutputBody } | ConvertTo-Json)
+    Write-output "BodyJSON" $BodyJSON
 
-[string]$token = $ENV:GHtoken
-[string]$user = $ENV:GHUser
-$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $User, $Token)))
-$Header = @{
-    Authorization = ("Basic {0}" -f $base64AuthInfo)
+    # Post to the Github API. The URL is created from the request
+    $Splat = @{
+        Headers     = $Header
+        Method      = "POST"
+        Uri         = "$($body.issue.url)/comments"
+        body        = $BodyJSON
+        ContentType = "application/JSON"
+    }
+    Invoke-RestMethod @Splat
 }
-write-output "body" $outbody
-$bodyjson = (@{body=$outBody} | ConvertTo-Json)
-Write-output "bodyJson" $bodyjson
-Invoke-RestMethod -Headers $Header -Method POST -Uri "$($body.issue.url)/comments" -body $bodyjson -ContentType "application/JSON"
-}
 
-
-# Associate values to output bindings by calling 'Push-OutputBinding'.
+# Create an outputBody as a respons to the web hook call.
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-    StatusCode = "OK"
-    Body = $body
-})
+        StatusCode = [HttpStatusCode]::OK
+        Body       = $Body
+    })

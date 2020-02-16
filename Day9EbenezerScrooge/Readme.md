@@ -2,11 +2,13 @@
 
 ## Process
 
+**Update**: I have cleaned up this code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/3f310629738f888a2c27e1fd435ebef0c0c0637e/Day9EbenezerScrooge)
+
 Azure Function App
 
 This is a PowerShell Function App.
-It gets triggered by a github webhook and talks to the Github API.
-Of course it used emojis, because that makes everything better. 
+It gets triggered by a github web hook and talks to the Github API.
+Of course it used emojis, because that makes everything better.  
 
 ![image](./comment.PNG)
 
