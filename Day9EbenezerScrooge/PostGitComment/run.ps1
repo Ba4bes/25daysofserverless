@@ -25,7 +25,7 @@ Write-Output $Request.Body
 
 # Collect information from the input from GitHub
 $Body = $request.Body
-$username = $body.issue.user.login
+$username = $Body.issue.user.login
 
 # Results are only needed if a new issue is opened.
 if ($Body.action -eq "Opened") {
@@ -41,7 +41,7 @@ if ($Body.action -eq "Opened") {
     }
     Write-Output "body" $OutputBody
     # Create the body for the Github API
-    $BodyJSON = (@{Body = $OutputBody } | ConvertTo-Json)
+    $BodyJSON = (@{body = $OutputBody } | ConvertTo-Json)
     Write-output "BodyJSON" $BodyJSON
 
     # Post to the Github API. The URL is created from the request
