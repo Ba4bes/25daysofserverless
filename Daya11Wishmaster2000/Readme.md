@@ -2,8 +2,18 @@
 
 ## Azure Function App
 
+**Update**: I have cleaned up the code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/5f716cabfa2fd5309078f77e105013fa82cc160d/Day11WishMaster2000)
+
 Well here we go combining all the skills :-D
-I did an Azure Function App (PowerShell of course) talking to a CosmosDB, like on [Day 2](../Day4potluck/readme.md). Combine that with the form and results like on [Day 7](../Day7Pictures/Readme.md). Finally, the messaging to Teams, like in [Day 6](../Day6Sinterklaas/Readme.MD). The new thing of the day was using the Database as a trigger, which worked well. 
+I did an Azure Function App (PowerShell of course) talking to a CosmosDB, like on [Day 4](../Day4potluck/readme.md). Combine that with the form and results like on [Day 7](../Day7Pictures/Readme.md). Finally, the messaging to Teams, like in [Day 6](../Day6Sinterklaas/Readme.MD). The new thing of the day was using the Database as a trigger, which wasn't too hard.
+
+The app can be called here <https://4besday11.azurewebsites.net/api/FrontPage>
+
+![input](./Images/Form.PNG)
+
+The message in Teams that follows:
+
+![Teams Message](./Images/teams.PNG)
 
 ## The Challenge
 

@@ -5,8 +5,8 @@
       "name": "Documents",
       "direction": "in",
       "leaseCollectionName": "leases",
-      "connectionStringSetting": "4bes_DOCUMENTDB",
-      "databaseName": "Day11",
+      "connectionStringSetting": "db_string",
+      "databaseName": "Day13",
       "collectionName": "Day11",
       "createLeaseCollectionIfNotExists": "true"
     }
