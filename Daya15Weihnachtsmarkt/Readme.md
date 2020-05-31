@@ -2,6 +2,8 @@
 
 ## Process
 
+**Update**: I have cleaned up this code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/0ced06700f7f085da9201888182f31ad7a05811d/Daya15Weihnachtsmarkt)
+
 So I started off with day 7 and worked from there.
 I changed the second function to get the tags and description through Azure Cognitive services.
 
