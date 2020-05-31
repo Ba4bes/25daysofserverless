@@ -3,7 +3,7 @@
 ## Azure Function App
 
 Lets try SignalR again!
-I must say, I own a lot to websites that really lay this process out step-by-step.
+I must say, I read a lot to websites that really lay this process out step-by-step.
 For example:
 
 <https://github.com/Azure-Samples/signalr-service-quickstart-serverless-chat>
