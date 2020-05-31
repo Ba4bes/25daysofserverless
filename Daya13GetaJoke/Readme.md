@@ -2,20 +2,26 @@
 
 ## Azure Function App
 
+**Update**: I have cleaned up this code. [Click here for the original submission](https://github.com/Ba4bes/25daysofserverless/tree/7ce8a7da8a4cb42371d7b87e2b6861a181bb7d6a/Daya13GetaJoke)
+
 I was in no way able to complete the original challenge.
 I have no experience with python. Or Machine learning. And at that point, it is in my opinion not possible to complete this challenge in a day. I feel it is a bit to specific.
 
 So I made my own challenge, based on the real challenge. 
-I have created a blob triggered function app that responses to the dataset that is uploaden.
+I have created a blob triggered function app that responds to the dataset that is uploaded.
 It takes all the entries in the dataset and uses the Sentiment analysis service to give every joke a score. This is the base to work on and the jokes with their scores are stored in a CosmosDB.
 
 When the tricksters want to get a joke, they can call on <https://4besday13.azurewebsites.net/api/GetJoke>.
-This website will give one of the jokes that is in the top 10 of the highest scores in the database. 
+This website will give one of the jokes that is in the top 25 of the highest scores in the database. 
 The trickster can then rate if the joke is funny or not. If they enter that the joke isn't funny, the score is reduced by 0.10 points. If it is funny, it is increased by .10 points. The new data is written to the database.
 
-So if enough tricksters use the joke-site, you should be left with the 10 funniest jokes in the database.
+So if enough tricksters use the joke-site, you should always get one of the 25 funniest jokes in the database.
 
 Everything is of course running on PowerShell function apps, with CosmosDB. 
+
+## Call the function
+
+Call the function here: <https://4besday13.azurewebsites.net/api/GetJoke>
 
 ## The Challenge
 
